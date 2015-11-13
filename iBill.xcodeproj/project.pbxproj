@@ -8,22 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		74BAA8951BF5D66D00C2E03C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BAA8941BF5D66D00C2E03C /* main.m */; };
-		74BAA8981BF5D66D00C2E03C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BAA8971BF5D66D00C2E03C /* AppDelegate.m */; };
-		74BAA89B1BF5D66D00C2E03C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BAA89A1BF5D66D00C2E03C /* ViewController.m */; };
 		74BAA89E1BF5D66D00C2E03C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74BAA89C1BF5D66D00C2E03C /* Main.storyboard */; };
 		74BAA8A01BF5D66D00C2E03C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74BAA89F1BF5D66D00C2E03C /* Assets.xcassets */; };
+		74BAA8AF1BF5D72300C2E03C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BAA8AC1BF5D72300C2E03C /* AppDelegate.m */; };
+		74BAA8B01BF5D72300C2E03C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BAA8AE1BF5D72300C2E03C /* ViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		74BAA8901BF5D66D00C2E03C /* iBill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iBill.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74BAA8941BF5D66D00C2E03C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		74BAA8961BF5D66D00C2E03C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		74BAA8971BF5D66D00C2E03C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		74BAA8991BF5D66D00C2E03C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		74BAA89A1BF5D66D00C2E03C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		74BAA89D1BF5D66D00C2E03C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		74BAA89F1BF5D66D00C2E03C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		74BAA8A41BF5D66D00C2E03C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		74BAA8AB1BF5D72300C2E03C /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Classes/AppDelegate.h; sourceTree = "<group>"; };
+		74BAA8AC1BF5D72300C2E03C /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Classes/AppDelegate.m; sourceTree = "<group>"; };
+		74BAA8AD1BF5D72300C2E03C /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewController.h; path = Classes/ViewController.h; sourceTree = "<group>"; };
+		74BAA8AE1BF5D72300C2E03C /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewController.m; path = Classes/ViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,10 +56,7 @@
 		74BAA8921BF5D66D00C2E03C /* iBill */ = {
 			isa = PBXGroup;
 			children = (
-				74BAA8961BF5D66D00C2E03C /* AppDelegate.h */,
-				74BAA8971BF5D66D00C2E03C /* AppDelegate.m */,
-				74BAA8991BF5D66D00C2E03C /* ViewController.h */,
-				74BAA89A1BF5D66D00C2E03C /* ViewController.m */,
+				74BAA8AA1BF5D71800C2E03C /* Classes */,
 				74BAA89C1BF5D66D00C2E03C /* Main.storyboard */,
 				74BAA89F1BF5D66D00C2E03C /* Assets.xcassets */,
 				74BAA8A41BF5D66D00C2E03C /* Info.plist */,
@@ -74,6 +71,17 @@
 				74BAA8941BF5D66D00C2E03C /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		74BAA8AA1BF5D71800C2E03C /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				74BAA8AB1BF5D72300C2E03C /* AppDelegate.h */,
+				74BAA8AC1BF5D72300C2E03C /* AppDelegate.m */,
+				74BAA8AD1BF5D72300C2E03C /* ViewController.h */,
+				74BAA8AE1BF5D72300C2E03C /* ViewController.m */,
+			);
+			name = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -107,6 +115,7 @@
 				TargetAttributes = {
 					74BAA88F1BF5D66D00C2E03C = {
 						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = D8KED7YVAV;
 					};
 				};
 			};
@@ -145,8 +154,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				74BAA89B1BF5D66D00C2E03C /* ViewController.m in Sources */,
-				74BAA8981BF5D66D00C2E03C /* AppDelegate.m in Sources */,
+				74BAA8B01BF5D72300C2E03C /* ViewController.m in Sources */,
+				74BAA8AF1BF5D72300C2E03C /* AppDelegate.m in Sources */,
 				74BAA8951BF5D66D00C2E03C /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -249,7 +258,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = iBill/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = de.webtogo.iBill;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -260,7 +272,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = iBill/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = de.webtogo.iBill;
 				PRODUCT_NAME = "$(TARGET_NAME)";
