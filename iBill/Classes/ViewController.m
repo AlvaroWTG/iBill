@@ -8,8 +8,8 @@
 
 #import "ViewController.h"
 
-#define kListMagnificFive       @[@"Alvaro", @"David", @"Nicola", @"Alfonso", @"Pepe"]
-#define kListFantasicFour       @[@"Alvaro", @"Nicola", @"Alfonso", @"Pepe"]
+#define kListJacksonFive        @[@"Alvaro", @"David", @"Nicola", @"Alfonso", @"Pepe"]
+#define kListFantasticFour      @[@"Alvaro", @"Nicola", @"Alfonso", @"Pepe"]
 #define kListThreeMusketeers    @[@"Alvaro", @"Alfonso", @"Pepe"]
 #define kSliderValueOne         @"The Three Musketeers"
 #define kSliderValueTwo         @"The Fantastic Four"
@@ -18,7 +18,6 @@
 #define kBuybackStatusOne       0.33f
 #define kBuybackStatusTwo       0.66f
 #define kBuybackStatusThree     1.0f
-#define kColor3A3A3A            [UIColor colorWithRed:(56.0/255.0) green:(56.0/255.0) blue:(56.0/255.0) alpha:1.0]
 
 @interface ViewController ()
 
@@ -32,8 +31,6 @@
 @property (weak, nonatomic) IBOutlet UISlider *slider;
 /** Property that represents the selected option */
 @property (nonatomic) BOOL flagSelectedOption;
-/** Property that represents the selected option */
-@property (nonatomic) float sliderValue;
 /** Property that represents the selected option */
 @property (nonatomic, strong) NSArray *currentList;
 
@@ -77,15 +74,14 @@
         self.currentList = kListThreeMusketeers;
     } else if (currentValue < kBuybackStatusTwo) {
         self.labelSlider.text = kSliderValueTwo;
-        self.currentList = kListFantasicFour;
+        self.currentList = kListFantasticFour;
     } else if (currentValue < kBuybackStatusThree) {
         self.labelSlider.text = kSliderValueThree;
-        self.currentList = kListMagnificFive;
+        self.currentList = kListJacksonFive;
     } else {
         self.labelSlider.text = kSliderValueFour;
         self.flagSelectedOption = NO;
     }
-    self.sliderValue = currentValue;
 }
 
 # pragma mark - IBAction method implementation
@@ -107,7 +103,7 @@
         result = self.currentList[0];
         index = 0;
     } else {
-        result = self.currentList[index];
+        result = self.currentList[(NSUInteger) index];
         index ++;
     }
     [[NSUserDefaults standardUserDefaults] setInteger:index forKey:@"indexPrevious"];
