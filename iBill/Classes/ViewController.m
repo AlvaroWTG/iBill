@@ -103,11 +103,13 @@
 {
     NSString *result = nil;
     NSInteger index = [[NSUserDefaults standardUserDefaults] integerForKey:@"indexPrevious"];
-    index ++;
-    if (index > self.currentList.count) {
+    if (index >= self.currentList.count) {
         result = self.currentList[0];
         index = 0;
-    } else result = self.currentList[index];
+    } else {
+        result = self.currentList[index];
+        index ++;
+    }
     [[NSUserDefaults standardUserDefaults] setInteger:index forKey:@"indexPrevious"];
     return result;
 }
