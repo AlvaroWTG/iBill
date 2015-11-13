@@ -18,6 +18,7 @@
 #define kBuybackStatusOne       0.33f
 #define kBuybackStatusTwo       0.66f
 #define kBuybackStatusThree     1.0f
+#define kColor3A3A3A            [UIColor colorWithRed:(56.0/255.0) green:(56.0/255.0) blue:(56.0/255.0) alpha:1.0]
 
 @interface ViewController ()
 
@@ -52,8 +53,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+    // Setup the slider and the button title
     [self.slider addTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
     [self.button setTitle:[@"Calculate" uppercaseString] forState:UIControlStateNormal];
+    self.labelResult.text = @"";
+    self.labelSlider.text = @"";
 }
 
 - (void)didReceiveMemoryWarning
