@@ -8,16 +8,19 @@
 
 #import "ViewController.h"
 
+#define kListJacksonSix         @[@"Alvaro", @"Eva", @"David", @"Nicola", @"Alfonso", @"Pepe"]
 #define kListJacksonFive        @[@"Alvaro", @"David", @"Nicola", @"Alfonso", @"Pepe"]
 #define kListFantasticFour      @[@"Alvaro", @"Nicola", @"Alfonso", @"Pepe"]
 #define kListThreeMusketeers    @[@"Alvaro", @"Alfonso", @"Pepe"]
 #define kSliderValueOne         @"The Three Musketeers"
 #define kSliderValueTwo         @"The Fantastic Four"
 #define kSliderValueThree       @"The Backstreet Boys"
-#define kSliderValueFour        @"Unknown"
-#define kBuybackStatusOne       0.33f
-#define kBuybackStatusTwo       0.66f
-#define kBuybackStatusThree     1.0f
+#define kSliderValueFour        @"Six Wives of Henry VIII"
+#define kSliderValueFive        @"Unknown"
+#define kBuybackStatusOne       0.25f
+#define kBuybackStatusTwo       0.50f
+#define kBuybackStatusThree     0.75f
+#define kBuybackStatusFour      1.0f
 
 @interface ViewController ()
 
@@ -78,8 +81,11 @@
     } else if (currentValue < kBuybackStatusThree) {
         self.labelSlider.text = kSliderValueThree;
         self.currentList = kListJacksonFive;
-    } else {
+    } else if (currentValue < kBuybackStatusFour) {
         self.labelSlider.text = kSliderValueFour;
+        self.currentList = kListJacksonSix;
+    } else {
+        self.labelSlider.text = kSliderValueFive;
         self.flagSelectedOption = NO;
     }
 }
