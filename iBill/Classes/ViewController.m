@@ -8,24 +8,36 @@
 
 #import "ViewController.h"
 
-#define kListJacksonSix         @[@"Alvaro", @"Eva", @"David", @"Nicola", @"Alfonso", @"Pepe"]
-#define kListJacksonFive        @[@"Alvaro", @"David", @"Nicola", @"Alfonso", @"Pepe"]
-#define kListFantasticFour      @[@"Alvaro", @"Nicola", @"Alfonso", @"Pepe"]
-#define kListThreeMusketeers    @[@"Alvaro", @"Alfonso", @"Pepe"]
-#define kSliderValueOne         @"The Three Musketeers"
-#define kSliderValueTwo         @"The Fantastic Four"
-#define kSliderValueThree       @"The Backstreet Boys"
-#define kSliderValueFour        @"Six Wives of Henry VIII"
+#define kListMagnificentSeven   @[@"Alvaro", @"Pepe", @"Alfonso", @"Nicola", @"Jesús", @"David", @"Eva/Lisa"]
+#define kListJacksonSix         @[@"Alvaro", @"Pepe", @"Alfonso", @"Nicola", @"Jesús", @"David"]
+#define kListJacksonFive        @[@"Alvaro", @"Pepe", @"Alfonso", @"Nicola", @"Jesús"]
+#define kListFantasticFour      @[@"Alvaro", @"Pepe", @"Alfonso", @"Nicola"]
+#define kListThreeMusketeers    @[@"Alvaro", @"Pepe", @"Alfonso"]
+#define kListAmounts            @[@"8.60€", @"9.60€", @"10.60€", @"11.60€", @"15.60€", @"17.60€"]
+#define kSliderValueZero        @"The Three Musketeers"
+#define kSliderValueOne         @"The Fantastic Four"
+#define kSliderValueTwo         @"The Backstreet Boys"
+#define kSliderValueThree       @"Six Wives of Henry VIII"
+#define kSliderValueFour        @"The Magnificent Seven"
 #define kSliderValueFive        @"Unknown"
-#define kBuybackStatusOne       0.25f
-#define kBuybackStatusTwo       0.50f
-#define kBuybackStatusThree     0.75f
+#define kEmptyString            @""
+#define kButtonTitle            @"Roll the dice"
+#define kPreviousIndexKey       @"indexPrevious"
+#define kAlertTitle             @"Warning"
+#define kAlertDescription       @"Please, set the slider value before calculating"
+#define kAlertButtonTitle       @"Dismiss"
+#define kBuybackStatusZero      0.20f
+#define kBuybackStatusOne       0.40f
+#define kBuybackStatusTwo       0.60f
+#define kBuybackStatusThree     0.80f
 #define kBuybackStatusFour      1.0f
 
 @interface ViewController ()
 
 /** Property that represents the result of the check */
 @property (weak, nonatomic) IBOutlet UILabel *labelResult;
+/** Property that represents the result of the check */
+@property (weak, nonatomic) IBOutlet UILabel *labelAmount;
 /** Property that represents the result of the slider */
 @property (weak, nonatomic) IBOutlet UILabel *labelSlider;
 /** Property that represents the button to calculate */
@@ -36,6 +48,8 @@
 @property (nonatomic) BOOL flagSelectedOption;
 /** Property that represents the selected option */
 @property (nonatomic, strong) NSArray *currentList;
+/** Property that represents the random amount of money */
+@property (nonatomic) NSInteger amount;
 
 /**
  * Function that performs an action when the button is clicked
@@ -55,9 +69,12 @@
     
     // Setup the slider and the button title
     [self.slider addTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
-    [self.button setTitle:[@"Calculate" uppercaseString] forState:UIControlStateNormal];
-    self.labelResult.text = @"";
-    self.labelSlider.text = @"";
+    [self.button setTitle:[kButtonTitle uppercaseString] forState:UIControlStateNormal];
+
+    // Setup labels for the screen
+    self.labelResult.text = kEmptyString;
+    self.labelSlider.text = kEmptyString;
+    self.labelAmount.text = kEmptyString;
 }
 
 - (void)didReceiveMemoryWarning
@@ -72,15 +89,18 @@
 {
     self.flagSelectedOption = YES;
     float currentValue = sender.value;
-    if (currentValue < kBuybackStatusOne) {
-        self.labelSlider.text = kSliderValueOne;
+    if (currentValue < kBuybackStatusZero) {
+        self.labelSlider.text = kSliderValueZero;
         self.currentList = kListThreeMusketeers;
+    } else if (currentValue < kBuybackStatusOne) {
+        self.labelSlider.text = kSliderValueOne;
+        self.currentList = kListFantasticFour;
     } else if (currentValue < kBuybackStatusTwo) {
         self.labelSlider.text = kSliderValueTwo;
-        self.currentList = kListFantasticFour;
+        self.currentList = kListJacksonFive;
     } else if (currentValue < kBuybackStatusThree) {
         self.labelSlider.text = kSliderValueThree;
-        self.currentList = kListJacksonFive;
+        self.currentList = kListJacksonSix;
     } else if (currentValue < kBuybackStatusFour) {
         self.labelSlider.text = kSliderValueFour;
         self.currentList = kListJacksonSix;
@@ -96,7 +116,8 @@
 {
     if (self.flagSelectedOption) {
         self.labelResult.text = [self calculatePayer];
-    } else [[[UIAlertView alloc] initWithTitle:@"Warning" message:@"Please, set the slider value before calculating" delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil] show];
+        self.labelAmount.text = kListAmounts[arc4random() % kListAmounts.count];
+    } else [[[UIAlertView alloc] initWithTitle:kAlertTitle message:kAlertDescription delegate:nil cancelButtonTitle:kAlertButtonTitle otherButtonTitles:nil] show];
 }
 
 # pragma mark - Auxiliary functions
@@ -104,7 +125,7 @@
 - (NSString *)calculatePayer
 {
     NSString *result = nil;
-    NSInteger index = [[NSUserDefaults standardUserDefaults] integerForKey:@"indexPrevious"];
+    NSInteger index = [[NSUserDefaults standardUserDefaults] integerForKey:kPreviousIndexKey];
     if (index >= self.currentList.count) {
         result = self.currentList[0];
         index = 0;
@@ -112,7 +133,7 @@
         result = self.currentList[(NSUInteger) index];
         index ++;
     }
-    [[NSUserDefaults standardUserDefaults] setInteger:index forKey:@"indexPrevious"];
+    [[NSUserDefaults standardUserDefaults] setInteger:index forKey:kPreviousIndexKey];
     return result;
 }
 
