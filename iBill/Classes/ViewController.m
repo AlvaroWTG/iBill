@@ -8,17 +8,13 @@
 
 #import "ViewController.h"
 
-#define kListMagnificentSeven   @[@"Alvaro", @"Pepe", @"Alfonso", @"Nicola", @"Jesús", @"David", @"Eva/Lisa"]
-#define kListJacksonSix         @[@"Alvaro", @"Pepe", @"Alfonso", @"Nicola", @"Jesús", @"David"]
-#define kListJacksonFive        @[@"Alvaro", @"Pepe", @"Alfonso", @"Nicola", @"Jesús"]
-#define kListFantasticFour      @[@"Alvaro", @"Pepe", @"Alfonso", @"Nicola"]
+#define kColor9C5821            [UIColor colorWithRed:(156.0/255.0) green:(87.0/255.0) blue:(34.0/255.0) alpha:1.0]
+#define kListJacksonFive        @[@"Alvaro", @"Pepe", @"Alfonso", @"Alex", @"Hernan"]
+#define kListFantasticFour      @[@"Alvaro", @"Pepe", @"Alfonso", @"Alex"]
 #define kListThreeMusketeers    @[@"Alvaro", @"Pepe", @"Alfonso"]
-#define kListAmounts            @[@"8.60€", @"9.60€", @"10.60€", @"11.60€", @"15.60€", @"17.60€"]
 #define kSliderValueZero        @"The Three Musketeers"
 #define kSliderValueOne         @"The Fantastic Four"
 #define kSliderValueTwo         @"The Backstreet Boys"
-#define kSliderValueThree       @"Six Wives of Henry VIII"
-#define kSliderValueFour        @"The Magnificent Seven"
 #define kSliderValueFive        @"Unknown"
 #define kEmptyString            @""
 #define kButtonTitle            @"Roll the dice"
@@ -26,18 +22,15 @@
 #define kAlertTitle             @"Warning"
 #define kAlertDescription       @"Please, set the slider value before calculating"
 #define kAlertButtonTitle       @"Dismiss"
-#define kBuybackStatusZero      0.20f
-#define kBuybackStatusOne       0.40f
-#define kBuybackStatusTwo       0.60f
-#define kBuybackStatusThree     0.80f
-#define kBuybackStatusFour      1.0f
+#define APP_NAME                @"iBill"
+#define kBuybackStatusZero      0.33f
+#define kBuybackStatusOne       0.66f
+#define kBuybackStatusTwo       1.0f
 
 @interface ViewController ()
 
 /** Property that represents the result of the check */
 @property (weak, nonatomic) IBOutlet UILabel *labelResult;
-/** Property that represents the result of the check */
-@property (weak, nonatomic) IBOutlet UILabel *labelAmount;
 /** Property that represents the result of the slider */
 @property (weak, nonatomic) IBOutlet UILabel *labelSlider;
 /** Property that represents the button to calculate */
@@ -50,6 +43,8 @@
 @property (nonatomic, strong) NSArray *currentList;
 /** Property that represents the random amount of money */
 @property (nonatomic) NSInteger amount;
+/** Property that represents the selected option */
+@property (nonatomic) BOOL isSet;
 
 /**
  * Function that performs an action when the button is clicked
@@ -95,18 +90,9 @@
     } else if (currentValue < kBuybackStatusOne) {
         self.labelSlider.text = kSliderValueOne;
         self.currentList = kListFantasticFour;
-    } else if (currentValue < kBuybackStatusTwo) {
+    } else {
         self.labelSlider.text = kSliderValueTwo;
         self.currentList = kListJacksonFive;
-    } else if (currentValue < kBuybackStatusThree) {
-        self.labelSlider.text = kSliderValueThree;
-        self.currentList = kListJacksonSix;
-    } else if (currentValue < kBuybackStatusFour) {
-        self.labelSlider.text = kSliderValueFour;
-        self.currentList = kListJacksonSix;
-    } else {
-        self.labelSlider.text = kSliderValueFive;
-        self.flagSelectedOption = NO;
     }
 }
 
