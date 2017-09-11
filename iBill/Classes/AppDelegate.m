@@ -14,6 +14,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [UINavigationBar appearance].titleTextAttributes = @{NSForegroundColorAttributeName : UIColor.whiteColor};
+    [UINavigationBar appearance].tintColor = UIColor.whiteColor;
 
     // Setup local push notification center
     [self setupLocalNotificationCenter:application launchOptions:launchOptions];
