@@ -23,7 +23,7 @@
 #define kAlertTitle             @"Warning"
 #define kAlertDescription       @"Please, set the slider value before calculating"
 #define kAlertButtonTitle       @"Dismiss"
-#define APP_NAME                @"iBill"
+#define APP_NAME                @"iCoffee"
 #define kBuybackStatusZero      0.33f
 #define kBuybackStatusOne       0.66f
 #define kBuybackStatusTwo       1.0f
@@ -112,7 +112,6 @@
 {
     if (self.flagSelectedOption) {
         self.labelResult.text = [self calculatePayer];
-        self.labelAmount.text = kListAmounts[arc4random() % kListAmounts.count];
     } else [[[UIAlertView alloc] initWithTitle:kAlertTitle message:kAlertDescription delegate:nil cancelButtonTitle:kAlertButtonTitle otherButtonTitles:nil] show];
 }
 
