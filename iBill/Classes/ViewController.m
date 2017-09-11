@@ -62,15 +62,24 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    
+
+    // Set the background color for the bar and the views
+    UINavigationBar *navigationBar = self.navigationController.navigationBar;
+    navigationBar.barStyle = (UIBarStyle) UIStatusBarStyleLightContent;
+    navigationBar.barTintColor = kColor9C5821;
+    navigationBar.translucent = NO;
+
+    // Set the title for the navigation bar
+    self.navigationController.topViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(didPressAdd:)];
+    self.navigationController.topViewController.navigationItem.title = APP_NAME;
+
     // Setup the slider and the button title
     [self.slider addTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
-    [self.button setTitle:[kButtonTitle uppercaseString] forState:UIControlStateNormal];
-
-    // Setup labels for the screen
+    [self.button setTitle:kButtonTitle.uppercaseString forState:UIControlStateNormal];
     self.labelResult.text = kEmptyString;
     self.labelSlider.text = kEmptyString;
-    self.labelAmount.text = kEmptyString;
+    self.flagSelectedOption = NO;
+    self.isSet = NO;
 }
 
 - (void)didReceiveMemoryWarning
@@ -109,17 +118,18 @@
 
 # pragma mark - Auxiliary functions
 
+/**
+ * Auxiliary function that calculates the payer
+ * @return payer    The string value for the payer
+ */
 - (NSString *)calculatePayer
 {
     NSString *result = nil;
     NSInteger index = [[NSUserDefaults standardUserDefaults] integerForKey:kPreviousIndexKey];
     if (index >= self.currentList.count) {
-        result = self.currentList[0];
         index = 0;
-    } else {
-        result = self.currentList[(NSUInteger) index];
-        index ++;
-    }
+    } else index ++;
+    result = self.currentList[(NSUInteger) index];
     [[NSUserDefaults standardUserDefaults] setInteger:index forKey:kPreviousIndexKey];
     return result;
 }
