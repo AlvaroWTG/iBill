@@ -119,6 +119,28 @@
     } else [[[UIAlertView alloc] initWithTitle:kAlertTitle message:kAlertDescription delegate:nil cancelButtonTitle:kAlertButtonTitle otherButtonTitles:nil] show];
 }
 
+- (void)didPressAdd:(UIBarButtonItem *)button
+{
+    if (!self.isSet) {
+        [[UNUserNotificationCenter currentNotificationCenter] removeAllPendingNotificationRequests];
+        UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc] init];
+        content.body = @"Rise and shine for breakfast.";
+        content.sound = UNNotificationSound.defaultSound;
+        content.title = @"It's coffee o'clock";
+        content.badge = @(1);
+        NSDateComponents *referenceDate = [[NSDateComponents alloc] init];
+        referenceDate.hour = 11;
+        referenceDate.minute = 01;
+        referenceDate.second = 00;
+        UNCalendarNotificationTrigger *trigger = [UNCalendarNotificationTrigger triggerWithDateMatchingComponents:referenceDate repeats:YES];
+        UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:[NSUUID UUID].UUIDString content:content trigger:trigger];
+        [[UNUserNotificationCenter currentNotificationCenter] addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
+            [self pushAlertWithError:error];
+            self.isSet = error == nil;
+        }];
+    } else [[[UIAlertView alloc] initWithTitle:APP_NAME message:@"You have already setup a reminder" delegate:nil cancelButtonTitle:kAlertButtonTitle otherButtonTitles:nil] show];
+}
+
 # pragma mark - Auxiliary functions
 
 /**
