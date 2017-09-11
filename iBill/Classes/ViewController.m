@@ -76,6 +76,9 @@
     // Setup the slider and the button title
     [self.slider addTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
     [self.button setTitle:kButtonTitle.uppercaseString forState:UIControlStateNormal];
+    self.button.backgroundColor = kColor9C5821;
+    self.labelSlider.textColor = kColor9C5821;
+    self.slider.tintColor = kColor9C5821;
     self.labelResult.text = kEmptyString;
     self.labelSlider.text = kEmptyString;
     self.flagSelectedOption = NO;
@@ -123,12 +126,10 @@
  */
 - (NSString *)calculatePayer
 {
-    NSString *result = nil;
-    NSInteger index = [[NSUserDefaults standardUserDefaults] integerForKey:kPreviousIndexKey];
-    if (index >= self.currentList.count) {
-        index = 0;
-    } else index ++;
-    result = self.currentList[(NSUInteger) index];
+    NSInteger index = 0;
+    NSInteger previousIndex = [[NSUserDefaults standardUserDefaults] integerForKey:kPreviousIndexKey];
+    if (previousIndex < self.currentList.count - 1) index = previousIndex + 1;
+    NSString *result = self.currentList[(NSUInteger) index];
     [[NSUserDefaults standardUserDefaults] setInteger:index forKey:kPreviousIndexKey];
     return result;
 }
