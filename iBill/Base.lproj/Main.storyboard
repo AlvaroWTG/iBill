@@ -37,7 +37,7 @@
                                     <constraint firstAttribute="height" constant="60" id="VPD-Re-AZK"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
-                                <color key="textColor" red="0.10455173254013062" green="0.32359132170677185" blue="0.46249964833259583" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Who pays today?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uQh-7b-gJ1">
@@ -55,12 +55,11 @@
                                     <constraint firstAttribute="height" constant="60" id="NVn-0e-vjB"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
-                                <color key="textColor" red="0.17255303263664246" green="0.17254787683486938" blue="0.17255082726478577" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SRc-UO-UnZ">
                                 <rect key="frame" x="16" y="444" width="288" height="40"/>
-                                <color key="backgroundColor" red="0.10455173254013062" green="0.32359132170677185" blue="0.46249964833259583" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="k0r-yT-kow"/>
                                 </constraints>
