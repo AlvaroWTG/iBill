@@ -22,6 +22,7 @@
 #define kPreviousIndexKey       @"indexPrevious"
 #define kAlertTitle             @"Warning"
 #define kAlertDescription       @"Please, set the slider value before calculating"
+#define kAlertDescriptionError  @"Error %ld - %@"
 #define kAlertButtonTitle       @"Dismiss"
 #define APP_NAME                @"iCoffee"
 #define kBuybackStatusZero      0.33f
@@ -132,6 +133,18 @@
     NSString *result = self.currentList[(NSUInteger) index];
     [[NSUserDefaults standardUserDefaults] setInteger:index forKey:kPreviousIndexKey];
     return result;
+}
+
+/**
+ * Auxiliary function that pushes an alert
+ * @param error     The error parameter received
+ */
+- (void)pushAlertWithError:(NSError *)error
+{
+    NSString *title = error ? kAlertTitle : APP_NAME;
+    NSString *description = @"Notification request succesfully created";
+    if (error) description = [NSString stringWithFormat:kAlertDescriptionError, (long)error.code, error.localizedDescription];
+    dispatch_async(dispatch_get_main_queue(), ^{[[[UIAlertView alloc] initWithTitle:title message:description delegate:nil cancelButtonTitle:kAlertButtonTitle otherButtonTitles:nil] show];});
 }
 
 @end
