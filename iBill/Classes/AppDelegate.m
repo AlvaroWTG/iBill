@@ -14,6 +14,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+
+    // Setup local push notification center
+    [self setupLocalNotificationCenter:application launchOptions:launchOptions];
     return YES;
 }
 
@@ -37,11 +40,42 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    NSUInteger localNotifications = [[UIApplication sharedApplication] scheduledLocalNotifications].count;
+    if (localNotifications > 0) application.applicationIconBadgeNumber = 0;
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+# pragma mark - UILocalNotification delegate
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(nonnull UILocalNotification *)notification
+{
+    if (application.applicationState == UIApplicationStateActive) {
+        [[[UIAlertView alloc] initWithTitle:@"iBill" message:notification.alertBody delegate:nil cancelButtonTitle:@"Accept" otherButtonTitles:nil] show];
+    }
+    application.applicationIconBadgeNumber = 0;
+}
+
+# pragma mark - Auxiliary function
+
+/**
+ * Auxiliary function that setups the local notification center
+ * @param application The application that has just been started
+ * @param launchOptions The dictionary with the launching options
+ */
+- (void)setupLocalNotificationCenter:(UIApplication *)application launchOptions:(NSDictionary *)launchOptions
+{
+    // First, register for user notifications settings
+    if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)]){ // iOS 8 or later
+        UIUserNotificationType allNotificationTypes = (UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound);
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:allNotificationTypes categories:nil];
+        [application registerUserNotificationSettings:settings];
+    }
+    UILocalNotification *locationNotification = launchOptions[UIApplicationLaunchOptionsLocalNotificationKey];
+    if (locationNotification) application.applicationIconBadgeNumber = 0; // Set icon badge number to zero
 }
 
 @end
