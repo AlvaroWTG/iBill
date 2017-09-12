@@ -20,7 +20,11 @@
 #define kButtonTitle            @"Roll the dice"
 #define kPreviousIndexKey       @"indexPrevious"
 #define kAlertTitle             @"Warning"
-#define kAlertDescription       @"Please, set the slider value before calculating"
+#define kAlertDescription       @"Please, select one of the three options first"
+#define kAlertDescription2      @"You have already setup a reminder"
+#define kNotificationBody       @"Rise and shine %@, you're on the clock."
+#define kNotificationTitle      @"It's coffee o'clock"
+#define kAlertDescriptionOk     @"Notification request succesfully created"
 #define kAlertDescriptionError  @"Error %ld - %@"
 #define kAlertButtonTitle       @"Dismiss"
 #define APP_NAME                @"iCoffee"
@@ -143,9 +147,9 @@
     if (!self.isSet) {
         [[UNUserNotificationCenter currentNotificationCenter] removeAllPendingNotificationRequests];
         UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc] init];
-        content.body = [NSString stringWithFormat:@"Rise and shine %@, you're on the clock.", [self calculatePayer]];
+        content.body = [NSString stringWithFormat:kNotificationBody, [self calculatePayer]];
         content.sound = UNNotificationSound.defaultSound;
-        content.title = @"It's coffee o'clock";
+        content.title = kNotificationTitle;
         content.badge = @(1);
         NSDateComponents *referenceDate = [[NSDateComponents alloc] init];
         referenceDate.hour = 11;
@@ -157,7 +161,7 @@
             [self pushAlertWithError:error];
             self.isSet = error == nil;
         }];
-    } else [[[UIAlertView alloc] initWithTitle:APP_NAME message:@"You have already setup a reminder" delegate:nil cancelButtonTitle:kAlertButtonTitle otherButtonTitles:nil] show];
+    } else [[[UIAlertView alloc] initWithTitle:APP_NAME message:kAlertDescription2 delegate:nil cancelButtonTitle:kAlertButtonTitle otherButtonTitles:nil] show];
 }
 
 # pragma mark - Auxiliary functions
@@ -184,8 +188,7 @@
 - (void)pushAlertWithError:(NSError *)error
 {
     NSString *title = error ? kAlertTitle : APP_NAME;
-    NSString *description = @"Notification request succesfully created";
-    if (error) description = [NSString stringWithFormat:kAlertDescriptionError, (long)error.code, error.localizedDescription];
+    NSString *description = error ? [NSString stringWithFormat:kAlertDescriptionError, (long)error.code, error.localizedDescription] : kAlertDescriptionOk;
     dispatch_async(dispatch_get_main_queue(), ^{[[[UIAlertView alloc] initWithTitle:title message:description delegate:nil cancelButtonTitle:kAlertButtonTitle otherButtonTitles:nil] show];});
 }
 
