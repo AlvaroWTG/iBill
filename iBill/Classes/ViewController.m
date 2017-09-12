@@ -40,6 +40,12 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageViewTwo;
 /** Property that represents the image view for the first option */
 @property (weak, nonatomic) IBOutlet UIImageView *imageViewThree;
+/** Property that represents the image view for the first option */
+@property (weak, nonatomic) IBOutlet UIImageView *imageViewRibbonOne;
+/** Property that represents the image view for the first option */
+@property (weak, nonatomic) IBOutlet UIImageView *imageViewRibbonTwo;
+/** Property that represents the image view for the first option */
+@property (weak, nonatomic) IBOutlet UIImageView *imageViewRibbonThree;
 /** Property that represents the result of the check */
 @property (weak, nonatomic) IBOutlet UILabel *labelResult;
 /** Property that represents the label for the first option */
@@ -119,6 +125,9 @@
     self.imageViewOne.tag = 0;
     self.imageViewTwo.tag = 1;
     self.imageViewThree.tag = 2;
+    self.imageViewRibbonOne.hidden = YES;
+    self.imageViewRibbonTwo.hidden = YES;
+    self.imageViewRibbonThree.hidden = YES;
     self.imageViewOne.userInteractionEnabled = YES;
     self.imageViewTwo.userInteractionEnabled = YES;
     self.imageViewThree.userInteractionEnabled = YES;
@@ -202,21 +211,21 @@
     switch (sender.view.tag) {
         case 0: // three musketeers
             self.currentList = kListThreeMusketeers;
-            self.imageViewOne.backgroundColor = kColor9C5821;
-            self.imageViewTwo.backgroundColor = UIColor.whiteColor;
-            self.imageViewThree.backgroundColor = UIColor.whiteColor;
+            self.imageViewRibbonOne.hidden = NO;
+            self.imageViewRibbonTwo.hidden = YES;
+            self.imageViewRibbonThree.hidden = YES;
             break;
         case 1: // a team
             self.currentList = kListFantasticFour;
-            self.imageViewOne.backgroundColor = UIColor.whiteColor;
-            self.imageViewTwo.backgroundColor = kColor9C5821;
-            self.imageViewThree.backgroundColor = UIColor.whiteColor;
+            self.imageViewRibbonOne.hidden = YES;
+            self.imageViewRibbonTwo.hidden = NO;
+            self.imageViewRibbonThree.hidden = YES;
             break;
         case 2: // jackson five
             self.currentList = kListJacksonFive;
-            self.imageViewOne.backgroundColor = UIColor.whiteColor;
-            self.imageViewTwo.backgroundColor = UIColor.whiteColor;
-            self.imageViewThree.backgroundColor = kColor9C5821;
+            self.imageViewRibbonOne.hidden = YES;
+            self.imageViewRibbonTwo.hidden = YES;
+            self.imageViewRibbonThree.hidden = NO;
             break;
         default: break;
     }
