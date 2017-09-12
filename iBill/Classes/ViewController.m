@@ -16,7 +16,6 @@
 #define kSliderValueZero        @"The Three Musketeers"
 #define kSliderValueOne         @"The Fantastic Four"
 #define kSliderValueTwo         @"The Backstreet Boys"
-#define kSliderValueFive        @"Unknown"
 #define kEmptyString            @""
 #define kButtonTitle            @"Roll the dice"
 #define kPreviousIndexKey       @"indexPrevious"
@@ -31,16 +30,24 @@
 
 @interface ViewController ()
 
+/** Property that represents the image view for the first option */
+@property (weak, nonatomic) IBOutlet UIImageView *imageViewOne;
+/** Property that represents the image view for the first option */
+@property (weak, nonatomic) IBOutlet UIImageView *imageViewTwo;
+/** Property that represents the image view for the first option */
+@property (weak, nonatomic) IBOutlet UIImageView *imageViewThree;
 /** Property that represents the result of the check */
 @property (weak, nonatomic) IBOutlet UILabel *labelResult;
-/** Property that represents the result of the slider */
-@property (weak, nonatomic) IBOutlet UILabel *labelSlider;
+/** Property that represents the label for the first option */
+@property (weak, nonatomic) IBOutlet UILabel *labelOne;
+/** Property that represents the label for the first option */
+@property (weak, nonatomic) IBOutlet UILabel *labelTwo;
+/** Property that represents the label for the first option */
+@property (weak, nonatomic) IBOutlet UILabel *labelThree;
 /** Property that represents the button to calculate */
 @property (weak, nonatomic) IBOutlet UIButton *button;
-/** Property that represents the slider of the options */
-@property (weak, nonatomic) IBOutlet UISlider *slider;
 /** Property that represents the selected option */
-@property (nonatomic) BOOL flagSelectedOption;
+@property (nonatomic) BOOL hasOption;
 /** Property that represents the selected option */
 @property (nonatomic, strong) NSArray *currentList;
 /** Property that represents the random amount of money */
@@ -75,15 +82,45 @@
     self.navigationController.topViewController.navigationItem.title = APP_NAME;
 
     // Setup the slider and the button title
-    [self.slider addTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
     [self.button setTitle:kButtonTitle.uppercaseString forState:UIControlStateNormal];
+    [self.button setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
     self.button.backgroundColor = kColor9C5821;
-    self.labelSlider.textColor = kColor9C5821;
-    self.slider.tintColor = kColor9C5821;
-    self.labelResult.text = kEmptyString;
-    self.labelSlider.text = kEmptyString;
-    self.flagSelectedOption = NO;
+    self.hasOption = NO;
     self.isSet = NO;
+
+    // Setup the label and image views
+    self.labelOne.adjustsFontSizeToFitWidth = YES;
+    self.labelTwo.adjustsFontSizeToFitWidth = YES;
+    self.labelThree.adjustsFontSizeToFitWidth = YES;
+    self.labelOne.textColor = kColor9C5821;
+    self.labelTwo.textColor = kColor9C5821;
+    self.labelThree.textColor = kColor9C5821;
+    self.labelOne.text = kSliderValueZero;
+    self.labelTwo.text = kSliderValueOne;
+    self.labelThree.text = kSliderValueTwo;
+    self.labelResult.text = kEmptyString;
+
+    // Setup the tap recognizer for both labels and the image
+    UITapGestureRecognizer *recognizer1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(recognizeGestureWith:)];
+    UITapGestureRecognizer *recognizer2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(recognizeGestureWith:)];
+    UITapGestureRecognizer *recognizer3 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(recognizeGestureWith:)];
+    recognizer1.numberOfTouchesRequired = 1;
+    recognizer2.numberOfTouchesRequired = 1;
+    recognizer3.numberOfTouchesRequired = 1;
+    recognizer1.numberOfTapsRequired = 1;
+    recognizer2.numberOfTapsRequired = 1;
+    recognizer3.numberOfTapsRequired = 1;
+
+    // Setup the gesture recognizers to the labels and image
+    self.imageViewOne.tag = 0;
+    self.imageViewTwo.tag = 1;
+    self.imageViewThree.tag = 2;
+    self.imageViewOne.userInteractionEnabled = YES;
+    self.imageViewTwo.userInteractionEnabled = YES;
+    self.imageViewThree.userInteractionEnabled = YES;
+    [self.imageViewOne addGestureRecognizer:recognizer1];
+    [self.imageViewTwo addGestureRecognizer:recognizer2];
+    [self.imageViewThree addGestureRecognizer:recognizer3];
 }
 
 - (void)didReceiveMemoryWarning
@@ -92,29 +129,11 @@
     // Dispose of any resources that can be recreated.
 }
 
-# pragma mark - IBAction slider method implementation
-
-- (IBAction)sliderValueChanged:(UISlider *)sender
-{
-    self.flagSelectedOption = YES;
-    float currentValue = sender.value;
-    if (currentValue < kBuybackStatusZero) {
-        self.labelSlider.text = kSliderValueZero;
-        self.currentList = kListThreeMusketeers;
-    } else if (currentValue < kBuybackStatusOne) {
-        self.labelSlider.text = kSliderValueOne;
-        self.currentList = kListFantasticFour;
-    } else {
-        self.labelSlider.text = kSliderValueTwo;
-        self.currentList = kListJacksonFive;
-    }
-}
-
 # pragma mark - IBAction method implementation
 
 - (IBAction)buttonTapped:(UIButton *)sender
 {
-    if (self.flagSelectedOption) {
+    if (self.hasOption) {
         self.labelResult.text = [self calculatePayer];
     } else [[[UIAlertView alloc] initWithTitle:kAlertTitle message:kAlertDescription delegate:nil cancelButtonTitle:kAlertButtonTitle otherButtonTitles:nil] show];
 }
@@ -124,7 +143,7 @@
     if (!self.isSet) {
         [[UNUserNotificationCenter currentNotificationCenter] removeAllPendingNotificationRequests];
         UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc] init];
-        content.body = @"Rise and shine for breakfast.";
+        content.body = [NSString stringWithFormat:@"Rise and shine %@, you're on the clock.", [self calculatePayer]];
         content.sound = UNNotificationSound.defaultSound;
         content.title = @"It's coffee o'clock";
         content.badge = @(1);
@@ -150,6 +169,7 @@
 - (NSString *)calculatePayer
 {
     NSInteger index = 0;
+    if (!self.currentList) self.currentList = kListThreeMusketeers;
     NSInteger previousIndex = [[NSUserDefaults standardUserDefaults] integerForKey:kPreviousIndexKey];
     if (previousIndex < self.currentList.count - 1) index = previousIndex + 1;
     NSString *result = self.currentList[(NSUInteger) index];
@@ -167,6 +187,36 @@
     NSString *description = @"Notification request succesfully created";
     if (error) description = [NSString stringWithFormat:kAlertDescriptionError, (long)error.code, error.localizedDescription];
     dispatch_async(dispatch_get_main_queue(), ^{[[[UIAlertView alloc] initWithTitle:title message:description delegate:nil cancelButtonTitle:kAlertButtonTitle otherButtonTitles:nil] show];});
+}
+
+/**
+ * Auxiliary function that recognize the first single gesture
+ * @param sender    The sender of the tap recognizer
+ */
+- (void)recognizeGestureWith:(UITapGestureRecognizer *)sender
+{
+    self.hasOption = YES;
+    switch (sender.view.tag) {
+        case 0: // three musketeers
+            self.currentList = kListThreeMusketeers;
+            self.imageViewOne.backgroundColor = kColor9C5821;
+            self.imageViewTwo.backgroundColor = UIColor.whiteColor;
+            self.imageViewThree.backgroundColor = UIColor.whiteColor;
+            break;
+        case 1: // a team
+            self.currentList = kListFantasticFour;
+            self.imageViewOne.backgroundColor = UIColor.whiteColor;
+            self.imageViewTwo.backgroundColor = kColor9C5821;
+            self.imageViewThree.backgroundColor = UIColor.whiteColor;
+            break;
+        case 2: // jackson five
+            self.currentList = kListJacksonFive;
+            self.imageViewOne.backgroundColor = UIColor.whiteColor;
+            self.imageViewTwo.backgroundColor = UIColor.whiteColor;
+            self.imageViewThree.backgroundColor = kColor9C5821;
+            break;
+        default: break;
+    }
 }
 
 @end
