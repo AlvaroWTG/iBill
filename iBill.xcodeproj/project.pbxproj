@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		748548501F67CD5200FCFD21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7485484E1F67CD5200FCFD21 /* LaunchScreen.storyboard */; };
 		74BAA8951BF5D66D00C2E03C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BAA8941BF5D66D00C2E03C /* main.m */; };
 		74BAA89E1BF5D66D00C2E03C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74BAA89C1BF5D66D00C2E03C /* Main.storyboard */; };
 		74BAA8A01BF5D66D00C2E03C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74BAA89F1BF5D66D00C2E03C /* Assets.xcassets */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7485484F1F67CD5200FCFD21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		74BAA8901BF5D66D00C2E03C /* iBill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iBill.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74BAA8941BF5D66D00C2E03C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		74BAA89D1BF5D66D00C2E03C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -58,6 +60,7 @@
 			children = (
 				74BAA89F1BF5D66D00C2E03C /* Assets.xcassets */,
 				74BAA8AA1BF5D71800C2E03C /* Classes */,
+				7485484E1F67CD5200FCFD21 /* LaunchScreen.storyboard */,
 				74BAA89C1BF5D66D00C2E03C /* Main.storyboard */,
 				74BAA8931BF5D66D00C2E03C /* Supporting Files */,
 			);
@@ -142,6 +145,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				748548501F67CD5200FCFD21 /* LaunchScreen.storyboard in Resources */,
 				74BAA8A01BF5D66D00C2E03C /* Assets.xcassets in Resources */,
 				74BAA89E1BF5D66D00C2E03C /* Main.storyboard in Resources */,
 			);
@@ -163,6 +167,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		7485484E1F67CD5200FCFD21 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7485484F1F67CD5200FCFD21 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
 		74BAA89C1BF5D66D00C2E03C /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -258,7 +270,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = iBill/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -272,7 +283,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = iBill/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
